@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
+    "update:db":"ts-node src/config/db/pg.ts",
     "dev": "nodemon src/server.ts",
     "start": "nodemon src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"

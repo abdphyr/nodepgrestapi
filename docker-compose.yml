@@ -1,0 +1,14 @@
+version: '4.12.0'
+services:
+  nodepg-db:
+    image: postgres:15
+    ports:
+      - 5430:5432
+    environment:
+      POSTGRES_USER: nodepg
+      POSTGRES_PASSWORD: nodepg
+      POSTGRES_DB: employer
+    networks:
+      - abdnode
+networks:
+  abdnode:

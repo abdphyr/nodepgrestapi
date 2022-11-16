@@ -2,16 +2,16 @@ import { Router } from "express";
 import { JobController } from "./JobController";
 
 export class JobRouter {
-  private static readonly router = Router()
+  private static readonly _router = Router()
   public static get routes() {
-    this.router
+    this._router
       .route("/")
       .get(JobController.getJobs)
       .post(JobController.postJob)
-    this.router
-      .route("/:id")
+    this._router
+      .route("/:jobId")
       .get(JobController.getJob)
       .delete(JobController.deleteJob)
-    return this.router
+    return this._router
   }
 }

@@ -21,19 +21,19 @@ export type GetEmployers = RequestHandler<
 >
 
 export type GetEmployer = RequestHandler<
-  { [key: string]: string; },
+  { empId: string },
   IEmployer | { message: string },
   any
 >
 
 export type PutEmployer = RequestHandler<
-  { [key: string]: string; },
+  { empId: string },
   IEmployer | { message: string },
   IEmployer
 >
 
 export type DeleteEmployer = RequestHandler<
-  { [key: string]: string; },
+  { empId: string },
   IEmployer | { message: string },
   any
 >

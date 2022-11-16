@@ -12,10 +12,9 @@ export class JobController {
     }
   }
   public static postJob: PostJob = async (req, res) => {
-    const { error } = validatorJob({ title: req.body.title })
+    const { error } = validatorJob(req.body)
     if (error) {
-      res.status(400).json({ message: error.details[0].message })
-      return;
+      return res.status(400).json({ message: error.details[0].message })
     }
     try {
       const newJob = await JobService.postJob(req.body.title)
@@ -26,9 +25,9 @@ export class JobController {
   }
   public static getJob: DeleteJob = async (req, res) => {
     try {
-      const job = await JobService.getJob(req.params.id)
+      const job = await JobService.getJob(req.params.jobId)
       if (job.rows.length === 0) {
-        res.status(404).json({ message: 'Job not found' })
+        return res.status(404).json({ message: 'Job not found' })
       }
       res.status(200).json(job.rows[0])
     } catch (error: any) {
@@ -37,9 +36,9 @@ export class JobController {
   }
   public static deleteJob: DeleteJob = async (req, res) => {
     try {
-      const deletedJob = await JobService.deleteJob(req.params.id)
+      const deletedJob = await JobService.deleteJob(req.params.jobId)
       if (deletedJob.rows.length === 0) {
-        res.status(404).json({ message: 'Job not found' })
+        return res.status(404).json({ message: 'Job not found' })
       }
       res.status(200).json(deletedJob.rows[0])
     } catch (error: any) {

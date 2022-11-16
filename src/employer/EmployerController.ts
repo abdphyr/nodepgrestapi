@@ -17,9 +17,10 @@ export class EmployerController {
   public static postEmployer: PostEmployer = async (req, res) => {
     const { error } = validatorEmployer(req.body)
     if (error) {
-      res.status(400).json({ message: error.details[0].message })
+      return res.status(400).send({ message: error.details[0].message })
     }
     try {
+      console.log(req.body)
       const newEmployer = await EmployerService.postEmployer(req.body)
       res.status(201).json(newEmployer.rows[0])
     } catch (error: any) {
@@ -28,9 +29,9 @@ export class EmployerController {
   }
   public static getEmployer: GetEmployer = async (req, res) => {
     try {
-      const newEmployer = await EmployerService.getEmployer(req.params.id)
+      const newEmployer = await EmployerService.getEmployer(req.params.empId)
       if (newEmployer.rows.length === 0) {
-        res.status(404).json({ message: 'Employer not found' })
+        return res.status(404).json({ message: 'Employer not found' })
       }
       res.status(200).json(newEmployer.rows[0])
     } catch (error: any) {
@@ -39,9 +40,9 @@ export class EmployerController {
   }
   public static putEmployer: PutEmployer = async (req, res) => {
     try {
-      const updateEmployer = await EmployerService.putEmployer(req.body, req.params.id)
+      const updateEmployer = await EmployerService.putEmployer(req.body, req.params.empId)
       if (updateEmployer.rows.length === 0) {
-        res.status(404).json({ message: 'Employer not found' })
+        return res.status(404).json({ message: 'Employer not found' })
       }
       res.status(201).json(updateEmployer.rows[0])
     } catch (error: any) {
@@ -50,9 +51,9 @@ export class EmployerController {
   }
   public static deleteEmployer: DeleteEmployer = async (req, res) => {
     try {
-      const deletedEmployer = await EmployerService.deleteEmployer(req.params.id)
+      const deletedEmployer = await EmployerService.deleteEmployer(req.params.empId)
       if (deletedEmployer.rows.length === 0) {
-        res.status(404).json({ message: 'Employer not found' })
+        return res.status(404).json({ message: 'Employer not found' })
       }
       res.status(200).json(deletedEmployer.rows[0])
     } catch (error: any) {

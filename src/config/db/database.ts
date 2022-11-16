@@ -13,5 +13,5 @@ export const pool = new Pool({
   host: 'localhost',
   database: 'employer',
   password: 'nodepg',
-  port: 5432,
+  port: 5430,
 })

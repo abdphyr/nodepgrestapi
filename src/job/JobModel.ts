@@ -6,19 +6,19 @@ export interface IJob {
 }
 
 export type GetJobs = RequestHandler<
-  { [key: string]: string; },
+  { [key: string]: string },
   IJob[] | { message: string },
   IJob
 >
 
 export type PostJob = RequestHandler<
-  { [key: string]: string; },
+  { jobId: string },
   IJob | { message: string },
   IJob
 >
 
 export type DeleteJob = RequestHandler<
-  { [key: string]: string; },
+  { jobId: string },
   IJob | { message: string },
   any
 >
